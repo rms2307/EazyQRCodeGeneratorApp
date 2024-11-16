@@ -11,7 +11,7 @@ namespace EazyQRCodeGeneratorApp.Pages
 
         private readonly string ImageType = "data:image/png;base64,";
 
-        private void GenerateQrCode()
+        private void GenerateQrCodeFromUrl()
         {
             using QRCodeGenerator qrGenerator = new();
             using QRCodeData qrCodeData = qrGenerator.CreateQrCode(SourceUrl, QRCodeGenerator.ECCLevel.Q);

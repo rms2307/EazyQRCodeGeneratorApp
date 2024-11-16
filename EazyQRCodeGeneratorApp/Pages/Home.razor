@@ -17,7 +17,7 @@
                 }
             </div>
         </div>
-        <button class="btn btn-primary w-100 text-uppercase fw-bolder" @onclick=GenerateQrCode disabled=@string.IsNullOrWhiteSpace(SourceUrl)>Gerar QR Code</button>
+        <button class="btn btn-primary w-100 text-uppercase fw-bolder" @onclick=GenerateQrCodeFromUrl disabled=@string.IsNullOrWhiteSpace(SourceUrl)>Gerar QR Code</button>
         <a href="@QrCodeBase64" download="QrCode.png">
             <button class="btn btn-primary w-100 text-uppercase fw-bolder mt-3" disabled=@(QrCodeByte is null)>Download</button>
         </a>
