@@ -1,0 +1,9 @@
+﻿.card {
+    max-width: 3500px;
+    border-radius: 8px;
+}
+
+#qrPreview {
+    background-color: #e9ecef;
+    border-radius: 4px;
+}
