@@ -3,23 +3,24 @@
 <PageTitle>Gerar QR Code</PageTitle>
 
 <div class="d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card bg-dark text-white p-4" style="width: 400px;">
-        <h5 class="card-title fw-bolder">QR Code</h5>
+    <div class="card bg-dark text-white p-4" style="width: 450px;">
+        <h5 class="card-title fw-bolder mb-3 text-center">Gerador de QR Code</h5>
         <div class="mb-3">
-            <label for="urlInput" class="form-label">URL</label>
-            <input type="text" id="urlInput" class="form-control" placeholder="www.ourmenu.com">
+            <input type="text" id="urlInput" class="form-control" placeholder="Digite sua URL aqui" @bind="SourceUrl">
         </div>
         <div class="mb-3 text-center">
             <label class="form-label">Preview</label>
-            <div id="qrPreview" class="border bg-light d-flex justify-content-center align-items-center mx-auto" style="width: 250px; height: 250px;">
-                <!-- QR Code Preview Placeholder -->
-                <img src="path/to/qr-code-image.png" alt="QR Code Preview">
+            <div id="qrPreview" class="qr-preview">
+                @if (!string.IsNullOrWhiteSpace(QrCodeBase64))
+                {
+                    <img src="@QrCodeBase64" alt="QR Code Preview" class="img-fluid">
+                }
             </div>
         </div>
         <div class="mb-3">
-            <label for="sliderInput" class="form-label">Size</label>
-            <input type="range" class="form-range" id="sliderInput" min="1" max="10">
+            <label for="sliderInput" class="form-label">Size: @Size</label>
+            <input type="range" class="form-range" id="sliderInput" min="10" max="25" @bind=Size>
         </div>
-        <button class="btn btn-primary w-100 text-uppercase fw-bolder">Gerar QR Code</button>
+        <button class="btn btn-primary w-100 text-uppercase fw-bolder" @onclick=GenerateQrCode disabled=@string.IsNullOrWhiteSpace(SourceUrl)>Gerar QR Code</button>
     </div>
 </div>
