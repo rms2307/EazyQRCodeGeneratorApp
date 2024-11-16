@@ -9,7 +9,7 @@
             <input type="text" id="urlInput" class="form-control" placeholder="Digite sua URL aqui" @bind="SourceUrl">
         </div>
         <div class="mb-3 text-center">
-            <label class="form-label">Preview</label>
+            <label class="form-label fw-bolder">Preview</label>
             <div id="qrPreview" class="qr-preview">
                 @if (!string.IsNullOrWhiteSpace(QrCodeBase64))
                 {
@@ -17,10 +17,9 @@
                 }
             </div>
         </div>
-        <div class="mb-3">
-            <label for="sliderInput" class="form-label">Size: @Size</label>
-            <input type="range" class="form-range" id="sliderInput" min="10" max="25" @bind=Size>
-        </div>
         <button class="btn btn-primary w-100 text-uppercase fw-bolder" @onclick=GenerateQrCode disabled=@string.IsNullOrWhiteSpace(SourceUrl)>Gerar QR Code</button>
+        <a href="@QrCodeBase64" download="QrCode.png">
+            <button class="btn btn-primary w-100 text-uppercase fw-bolder mt-3" disabled=@(QrCodeByte is null)>Download</button>
+        </a>
     </div>
 </div>
