@@ -23,7 +23,8 @@
                    id="btnradioPIX"
                    autocomplete="off"
                    checked="@((SelectedOption == OptionType.PIX) ? true : false)"
-                   @onclick="()=> OnOptionSelected(OptionType.PIX)">
+                   @onclick="()=> OnOptionSelected(OptionType.PIX)"
+                   disabled="true">
             <label class="btn btn-outline-info" for="btnradioPIX">PIX</label>
 
             <input type="radio"
