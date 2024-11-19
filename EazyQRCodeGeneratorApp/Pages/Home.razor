@@ -1,13 +1,66 @@
 ﻿@page "/"
+@using EazyQRCodeGeneratorApp.Enums
 
 <PageTitle>Gerar QR Code</PageTitle>
 
 <div class="d-flex justify-content-center align-items-center min-vh-100">
     <div class="card bg-dark text-white p-4" style="width: 450px;">
         <h5 class="card-title fw-bolder mb-3 text-center">Gerador de QR Code</h5>
-        <div class="mb-3">
-            <input type="text" id="urlInput" class="form-control" placeholder="Digite sua URL aqui" @bind="SourceUrl">
+
+        <div class="btn-group my-3" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio"
+                   class="btn-check"
+                   name="btnradio"
+                   id="btnradioURL"
+                   autocomplete="off"
+                   checked="@((SelectedOption == OptionType.URL) ? true : false)"
+                   @onclick="()=> OnOptionSelected(OptionType.URL)">
+            <label class="btn btn-outline-info" for="btnradioURL">URL</label>
+
+            <input type="radio"
+                   class="btn-check"
+                   name="btnradio"
+                   id="btnradioPIX"
+                   autocomplete="off"
+                   checked="@((SelectedOption == OptionType.PIX) ? true : false)"
+                   @onclick="()=> OnOptionSelected(OptionType.PIX)"
+                   disabled="true">
+            <label class="btn btn-outline-info" for="btnradioPIX">PIX</label>
+
+            <input type="radio"
+                   class="btn-check"
+                   name="btnradio"
+                   id="btnradioWiFi"
+                   autocomplete="off"
+                   checked="@((SelectedOption == OptionType.WiFi) ? true : false)"
+                   @onclick="()=> OnOptionSelected(OptionType.WiFi)">
+            <label class="btn btn-outline-info" for="btnradioWiFi">WiFi</label>
         </div>
+
+        @if (SelectedOption == OptionType.URL)
+        {
+            <div class="mb-3">
+                <input type="text" id="urlInput" class="form-control" placeholder="Digite sua URL aqui" @bind="SourceUrl">
+            </div>
+        }
+
+        @if (SelectedOption == OptionType.PIX)
+        {
+            <div class="mb-3">
+                <input type="text" id="pixKeyInput" class="form-control" placeholder="Digite a sua chave PIX aqui" @bind="PixKey">
+                <input type="text" id="nameBeneficiaryInput" class="form-control mt-2" placeholder="Digite o seu nome aqui" @bind="PixBeneficiary">
+                <input type="text" id="pixCityInput" class="form-control mt-2" placeholder="Digite a sua cidade aqui" @bind="PixCity">
+            </div>
+        }
+
+        @if (SelectedOption == OptionType.WiFi)
+        {
+            <div class="mb-3">
+                <input type="text" id="wiFiNameInput" class="form-control" placeholder="Digite nome da rede WiFi aqui" @bind="WiFiName">
+                <input type="text" id="wiFiPasswordInput" class="form-control mt-2" placeholder="Digite a senha da rede WiFi aqui" @bind="WiFiPassword">
+            </div>
+        }
+
         <div class="mb-3 text-center">
             <label class="form-label fw-bolder">Preview</label>
             <div id="qrPreview" class="qr-preview">
@@ -17,9 +70,10 @@
                 }
             </div>
         </div>
-        <button class="btn btn-primary w-100 text-uppercase fw-bolder" @onclick=GenerateQrCodeFromUrl disabled=@string.IsNullOrWhiteSpace(SourceUrl)>Gerar QR Code</button>
+
+        <button class="btn btn-info w-100 text-uppercase fw-bolder" @onclick=GenerateQrCode disabled=@DisableButtonGenerate>Gerar QR Code</button>
         <a href="@QrCodeBase64" download="QrCode.png">
-            <button class="btn btn-primary w-100 text-uppercase fw-bolder mt-3" disabled=@(QrCodeByte is null)>Download</button>
+            <button class="btn btn-info w-100 text-uppercase fw-bolder mt-3" disabled=@(QrCodeByte is null)>Download</button>
         </a>
     </div>
 </div>
