@@ -1,6 +1,6 @@
 {
-  "name": "EazyQRCodeGeneratorApp",
-  "short_name": "EazyQRCodeGeneratorApp",
+  "name": "Gera QRCode Fácil",
+  "short_name": "Gera QRCode",
   "id": "./",
   "start_url": "./",
   "display": "standalone",
